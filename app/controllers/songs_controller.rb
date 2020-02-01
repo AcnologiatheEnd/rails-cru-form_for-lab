@@ -17,6 +17,14 @@ class SongsController < ApplicationController
   end 
   
   def update 
-    @song = S
+    @song = Song.find(params[:id])
+    @song.update(song_params(:name))
+    redirect_to song_path(@song)
   end 
+  
+  private
+  
+    def song_params(*args)
+      params.require(:song).permit(:name)
+    end
 end
